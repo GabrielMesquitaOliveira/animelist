@@ -1,5 +1,7 @@
 package org.acme.model;
 
+import java.util.Optional;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,7 +15,7 @@ public class AnimeEntity {
 
     private double malScore;
     private Double imdbScore;
-    private Double rottenScore;
+    private Optional<Double> rottenScore;
     private Double myScore;
     private String myReview;
 }
