@@ -4,3 +4,6 @@
 -- insert into myentity (id, field) values(2, 'field-2');
 -- insert into myentity (id, field) values(3, 'field-3');
 -- alter sequence myentity_seq restart with 4;
+
+INSERT INTO ANIME (malId, malScore, imdbScore, rottenScore, myScore)
+VALUES (2, 7.25, null, null, 7.0);

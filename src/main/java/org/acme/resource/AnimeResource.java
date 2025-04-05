@@ -13,9 +13,11 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/anime")
 public class AnimeResource {
 
+    //Api do Jikan
     @Inject  
     JikanService jikanService;
     
+    //Retorna um anime com suas notas no Jikan/IMDB/Rotten
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
