@@ -1,5 +1,7 @@
 package org.acme.resource;
 
+import java.util.Optional;
+
 import org.acme.client.JikanRestClient;
 import org.acme.client.OmdbRestClient;
 import org.acme.dto.Anime;
@@ -36,15 +38,34 @@ public class AnimeResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Anime getAnime(@PathParam("id") int id) {
         Anime anime = jikanService.getAnimeById(id);
-        //Mal Score
+
+        // Mal Score
         System.out.println(anime.getData().getScore());
-        //IMDB Score
+
+        // IMDB Score
         System.out.println(omdbService.getMovieByTitle(anime.getData().getTitleEnglish(), "87e7d976").getImdbRating());
-        //Rotten Score
+        
+        // Rotten Score
         System.out.println(rottenTomatoesScraper.getCriticsScore(anime.getData().getTitleEnglish()));
 
-        anime.getData().setImbdscore(omdbService.getMovieByTitle(anime.getData().getTitleEnglish(), "87e7d976").getImdbRating());
-        anime.getData().setRottenscore(rottenTomatoesScraper.getCriticsScore(anime.getData().getTitleEnglish()));
+        String imdbRatingStr = omdbService
+                .getMovieByTitle(anime.getData().getTitleEnglish(), "87e7d976")
+                .getImdbRating();
+
+        Double imdbScore = null;
+        if (imdbRatingStr != null && !imdbRatingStr.isBlank()) {
+            try {
+                imdbScore = Double.parseDouble(imdbRatingStr);
+            } catch (NumberFormatException e) {
+                e.printStackTrace(); // ou log.error(...)
+            }
+        }
+
+        Optional<Double> rottenScoreOpt = rottenTomatoesScraper.getCriticsScore(anime.getData().getTitleEnglish());
+        Double rottenScore = rottenScoreOpt.orElse(null);
+
+        anime.getData().setImbdscore(imdbScore);
+        anime.getData().setRottenscore(rottenScore);
 
         return anime;
     }

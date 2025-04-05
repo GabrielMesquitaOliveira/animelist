@@ -40,8 +40,8 @@ public class Anime {
         private String duration;
         private String rating;
         private double score;
-        private String imbdscore;
-        private Optional<Double> rottenscore;
+        private double imbdscore;
+        private double rottenscore;
 
         @JsonProperty("scored_by")
         private int scoredBy;
