@@ -11,12 +11,18 @@ import java.util.Optional;
 @ApplicationScoped
 public class RottenTomatoesScraper {
 
-    public Optional<Double> getCriticsScore(String movieUrl) {
+    public Optional<Double> getCriticsScore(String title) {
         try {
-            Document doc = Jsoup.connect(movieUrl)
-                .userAgent("Mozilla/5.0")
-                .get();
+            // Constrói a URL para o anime na Rotten Tomatoes
+            String formattedTitle = title.toLowerCase().replace(" ", "_");
+            String url = "https://www.rottentomatoes.com/tv/" + formattedTitle;
 
+            // Acessa a página
+            Document doc = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0")
+                    .get();
+
+            // Seleciona o elemento com o score
             Element scoreElement = doc.selectFirst("rt-text[slot=criticsScore]");
 
             if (scoreElement != null) {
@@ -30,4 +36,5 @@ public class RottenTomatoesScraper {
 
         return Optional.empty();
     }
+
 }

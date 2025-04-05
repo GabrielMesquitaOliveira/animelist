@@ -36,7 +36,13 @@ public class AnimeResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Anime getAnime(@PathParam("id") int id) {
         Anime anime = jikanService.getAnimeById(id);
+        //Mal Score
         System.out.println(anime.getData().getScore());
+        //IMDB Score
+        System.out.println(omdbService.getMovieByTitle(anime.getData().getTitleEnglish(), "87e7d976").getImdbRating());
+        //Rotten Score
+        System.out.println(rottenTomatoesScraper.getCriticsScore(anime.getData().getTitleEnglish()));
+
         return jikanService.getAnimeById(id);
     }
 }
