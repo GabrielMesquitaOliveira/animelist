@@ -1,8 +1,32 @@
-# animelist
+# Anime Rating Aggregator
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Este projeto é uma API desenvolvida com **Quarkus** que busca informações de animes utilizando a **Jikan API** (MyAnimeList), obtém avaliações adicionais da **OMDb API** (IMDb) e do **Rotten Tomatoes** via web scraping, e salva essas informações em um banco de dados **H2**.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+---
+
+## ✨ Funcionalidades
+
+- Buscar informações de um anime por ID via Jikan API.
+- Consultar avaliações no OMDb por título.
+- Scraping da nota dos críticos no Rotten Tomatoes por título.
+- Armazenar avaliações e metadados em banco de dados relacional H2.
+- Integração via REST Client com múltiplas fontes de dados.
+- Arquitetura separada em Camadas (Controller, Service, Repository).
+
+---
+
+## 🔧 Tecnologias Utilizadas
+
+- Java 17+
+- Quarkus
+- H2 Database
+- Hibernate ORM + Panache
+- REST Client (MicroProfile)
+- JAX-RS
+- Jsoup (Web Scraping)
+- Lombok
+
+---
 
 ## Running the application in dev mode
 
