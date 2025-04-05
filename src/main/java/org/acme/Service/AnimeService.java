@@ -15,7 +15,7 @@ public class AnimeService {
     @Inject
     AnimeRepository animeRepository;
 
-    public void createAnime(Anime anime, Double ImdbScore, Optional<Double> RottenScore) {
+    public void createAnime(Anime anime, Double ImdbScore, Double RottenScore) {
         AnimeEntity entity = new AnimeEntity();
         entity.setMalId(anime.getData().getMalId());
         entity.setMalScore(anime.getData().getScore());
