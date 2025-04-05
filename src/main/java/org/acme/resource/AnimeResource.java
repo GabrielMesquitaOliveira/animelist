@@ -16,21 +16,21 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/anime")
 public class AnimeResource {
 
-    //Api do Jikan
+    // Api do Jikan
     @RestClient
-    @Inject  
+    @Inject
     JikanRestClient jikanService;
 
-    //API OMDB
+    // API OMDB
     @RestClient
     @Inject
     OmdbRestClient omdbService;
 
-    //Rotten Scrapper
+    // Rotten Scrapper
     @Inject
     RottenTomatoesScraper rottenTomatoesScraper;
-    
-    //Retorna um anime com suas notas no Jikan/IMDB/Rotten
+
+    // Retorna um anime com suas notas no Jikan/IMDB/Rotten
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -43,7 +43,9 @@ public class AnimeResource {
         //Rotten Score
         System.out.println(rottenTomatoesScraper.getCriticsScore(anime.getData().getTitleEnglish()));
 
-        return jikanService.getAnimeById(id);
+        anime.getData().setImbdscore(omdbService.getMovieByTitle(anime.getData().getTitleEnglish(), "87e7d976").getImdbRating());
+        anime.getData().setRottenscore(rottenTomatoesScraper.getCriticsScore(anime.getData().getTitleEnglish()));
+
+        return anime;
     }
 }
-

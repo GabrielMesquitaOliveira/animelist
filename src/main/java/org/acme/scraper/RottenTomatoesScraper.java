@@ -13,28 +13,30 @@ public class RottenTomatoesScraper {
 
     public Optional<Double> getCriticsScore(String title) {
         try {
-            // Constrói a URL para o anime na Rotten Tomatoes
             String formattedTitle = title.toLowerCase().replace(" ", "_");
             String url = "https://www.rottentomatoes.com/tv/" + formattedTitle;
-
-            // Acessa a página
+    
             Document doc = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0")
-                    .get();
-
-            // Seleciona o elemento com o score
+                .userAgent("Mozilla/5.0")
+                .get();
+    
             Element scoreElement = doc.selectFirst("rt-text[slot=criticsScore]");
-
+    
             if (scoreElement != null) {
                 String scoreText = scoreElement.text().replace("%", "").trim();
-                return Optional.of(Double.parseDouble(scoreText));
+                
+                if (!scoreText.isEmpty()) {
+                    return Optional.of(Double.parseDouble(scoreText));
+                }
             }
-
+    
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.err.println("Erro ao converter score para número: " + e.getMessage());
         }
-
+    
         return Optional.empty();
     }
-
+    
 }

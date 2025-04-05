@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -39,6 +40,8 @@ public class Anime {
         private String duration;
         private String rating;
         private double score;
+        private String imbdscore;
+        private Optional<Double> rottenscore;
 
         @JsonProperty("scored_by")
         private int scoredBy;

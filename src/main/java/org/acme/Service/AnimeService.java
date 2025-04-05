@@ -13,15 +13,20 @@ public class AnimeService {
     @Inject
     AnimeRepository animeRepository;
 
-    public void salvarAnime(Anime anime) {
+    public void createAnime(Anime anime, Double ImdbScore, Double RottenScore) {
         AnimeEntity entity = new AnimeEntity();
         entity.setMalId(anime.getData().getMalId());
         entity.setMalScore(anime.getData().getScore());
-        entity.setImdbScore(null); // Pode ser preenchido depois
-        entity.setRottenScore(null);
+        entity.setImdbScore(ImdbScore);
+        entity.setRottenScore(RottenScore);
         entity.setMyScore(null);
+        entity.setMyReview(null);
 
-        animeRepository.save(entity);
+        animeRepository.persist(entity);
     }
+
+    //update
+
+
 }
 

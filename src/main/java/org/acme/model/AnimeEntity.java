@@ -15,4 +15,5 @@ public class AnimeEntity {
     private Double imdbScore;
     private Double rottenScore;
     private Double myScore;
+    private String myReview;
 }
