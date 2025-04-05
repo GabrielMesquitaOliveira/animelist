@@ -13,7 +13,7 @@ public class AnimeService {
     @Inject
     AnimeRepository animeRepository;
 
-    public void saveAnime(Anime anime) {
+    public void salvarAnime(Anime anime) {
         AnimeEntity entity = new AnimeEntity();
         entity.setMalId(anime.getData().getMalId());
         entity.setMalScore(anime.getData().getScore());

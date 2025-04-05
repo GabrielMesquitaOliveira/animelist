@@ -1,7 +1,8 @@
 package org.acme.resource;
 
-import org.acme.Service.JikanService;
+import org.acme.client.JikanRestClient;
 import org.acme.dto.Anime;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
@@ -14,8 +15,12 @@ import jakarta.ws.rs.core.MediaType;
 public class AnimeResource {
 
     //Api do Jikan
+    @RestClient
     @Inject  
-    JikanService jikanService;
+    JikanRestClient jikanService;
+
+    //API OMDB
+    @Inject
     
     //Retorna um anime com suas notas no Jikan/IMDB/Rotten
     @GET
